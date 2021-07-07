@@ -11,7 +11,7 @@ sudo pacman -S $depackages --noconfirm
 sudo usermod -s /bin/zsh $(whoami)
 
 dot_files_dir="$HOME/.config/zsh"
-mkdir -r $dot_files_dir
+mkdir -p $dot_files_dir
 
 echo "export ZDOTDIR=~/.config/zsh" > ~/.zshenv
 

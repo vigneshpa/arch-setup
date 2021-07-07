@@ -17,7 +17,7 @@ echo "export ZDOTDIR=~/.config/zsh" > ~/.zshenv
 
 cat > "$dot_files_dir/.zshrc" <<- EOM
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+[[ \$- != *i* ]] && return
 
 
 # Lines configured by zsh-newuser-install
@@ -35,7 +35,7 @@ compinit
 
 # Custom Script
 alias ls='ls --color=auto'
-eval "$(starship init zsh)"
+eval "\$(starship init zsh)"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fortune

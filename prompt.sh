@@ -6,7 +6,7 @@ set -eo pipefail
 
 depackages=( zsh starship zsh-syntax-highlighting zsh-autosuggestions fortune-mod )
 depackages="${depackages[@]}"
-sudo pacman -S $depackages
+sudo pacman -S $depackages --noconfirm
 
 sudo usermod -s /bin/zsh $(whoami)
 

@@ -17,7 +17,7 @@ if ! command -v pacman &> /dev/null
 then
     echo "Warning:Pacman does not exists;unknown environment"
     plugins_dir="$dot_files_dir/plugins"
-    echo "Please install $packages packages manually manually. Installing plugins from github. To update plugins run this command 'sh $dot_files_dir/update_plugins'"
+    echo "Please install $packages packages manually manually. Installing plugins from github. To update plugins run this command 'sh $dot_files_dir/update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/sh
 for plu in "${plugins[@]}"
@@ -27,7 +27,7 @@ do
     curl --proto '=https' --tlsv1.2 -sSf "https://raw.githubusercontent.com/zsh-users/\$plu/master/\$plu.zsh" -o "\$plugin_dir/\$plu.zsh"
 done
 EOL
-    sh "$dot_files_dir/update_plugins"
+    sh "$dot_files_dir/update_plugins.sh"
 else
     packages="$depackages $plugins"
     sudo pacman -S "$packages" --noconfirm

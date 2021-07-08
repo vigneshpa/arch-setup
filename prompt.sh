@@ -10,8 +10,8 @@ mkdir -p "$dot_files_dir/cache"
 
 # Arch linux  packages
 
-packages=( zsh starship fortune-mod )
-plugins=( zsh-autosuggestions zsh-syntax-highlighting )
+packages=(zsh starship fortune-mod)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
 if ! command -v pacman &> /dev/null
 then
@@ -21,7 +21,7 @@ then
     echo "To update plugins run this command 'bash $dot_files_dir/update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
-plugins=( ${plugins[@]} )
+plugins=(${plugins[@]})
 plug_url=''
 for plu in plugins
 do

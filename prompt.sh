@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eo pipefail
+set -e pipefail
 
 
 dot_files_dir="$HOME/.config/zsh"

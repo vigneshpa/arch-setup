@@ -10,13 +10,13 @@ mkdir -p "$dot_files_dir/cache"
 
 # Arch linux  packages
 
-packages=( zsh starship fortune-mod )
-plugins=( zsh-autosuggestions zsh-syntax-highlighting )
+packages="zsh starship fortune-mod"
+plugins="zsh-autosuggestions zsh-syntax-highlighting"
 
 pacman -V
 if [ $? -eq 0 ]
 then
-    packages="${depackages[@]} ${plugins[@]}"
+    packages="$depackages $plugins"
     sudo pacman -S $packages --noconfirm
 else
     echo "Warning:Pacman does not exists;unknown environment"

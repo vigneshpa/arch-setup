@@ -18,15 +18,16 @@ then
     echo "Warning: Pacman does not exists.  unknown environment"
     plugins_dir="$dot_files_dir/plugins"
     echo "Please install $packages packages manually manually. Installing plugins from github."
-    echo "To update plugins run this command 'sh $dot_files_dir/update_plugins.sh'"
+    echo "To update plugins run this command 'bash $dot_files_dir/update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
 plugins=( ${plugins[@]} )
 for plu in plugins
 do
     plug_dir="./plugins/\$plu"
+    plug_url="https://raw.githubusercontent.com/zsh-users/\${plu}/master/\${plu}.zsh"
     mkdir -p "\$plug_dir"
-    curl --proto '=https' --tlsv1.2 -sSf "https://raw.githubusercontent.com/zsh-users/\$plu/master/\$plu.zsh" -o "\$plugin_dir/\$plu.zsh"
+    curl --proto '=https' --tlsv1.2 -sSf $plug_url -o "\$plugin_dir/\$plu.zsh"
 done
 EOL
     bash "$dot_files_dir/update_plugins.sh"

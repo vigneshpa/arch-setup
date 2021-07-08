@@ -19,4 +19,5 @@ mkdir -p $dot_files_dir/cache
 
 echo "export ZDOTDIR=~/.config/zsh" >> ~/.zshenv
 
-curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc > "$dot_files_dir/.zshrc"
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"

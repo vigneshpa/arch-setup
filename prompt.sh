@@ -22,6 +22,7 @@ then
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
 plugins=( ${plugins[@]} )
+plug_url=''
 for plu in plugins
 do
     plug_dir="./plugins/\$plu"

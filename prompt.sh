@@ -16,27 +16,44 @@ mkdir -p $dot_files_dir
 echo "export ZDOTDIR=~/.config/zsh" > ~/.zshenv
 
 cat > "$dot_files_dir/.zshrc" <<- EOM
+#!/usr/bin/env zsh
+
 # If not running interactively, don't do anything
 [[ \$- != *i* ]] && return
 
-
-# Lines configured by zsh-newuser-install
+# History
 HISTFILE="\$ZDOTDIR/.histfile"
 HISTSIZE=1000
 SAVEHIST=1000
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename "\$ZDOTDIR/.zshrc"
+
+# Tab Completions
 autoload -Uz compinit
+zstyle ':completion:*' menu select
+#case insensitive completion
+#zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zmodload zsh/complist
 compinit
-# End of lines added by compinstall
+_comp_options+=(globdots)
 
+# Disabling beep
+unsetopt BEEP
 
-# Custom Script
+# Aliases
 alias ls='ls --color=auto'
+
+# Starship
 eval "\$(starship init zsh)"
+
+# Ignore failed commands
+zshaddhistory() { whence \${\${(z)1}[1]} >| /dev/null || return 1 }
+
+# Adding tab completions to autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(history completion) #comment it if you think it is slowing down
+
+# Syntax highlition and auto completions
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Launching fortune
 fortune
 EOM

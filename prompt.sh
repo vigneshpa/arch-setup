@@ -6,9 +6,9 @@ set -eo pipefail
 
 depackages=( zsh starship zsh-syntax-highlighting zsh-autosuggestions fortune-mod )
 depackages="${depackages[@]}"
-if [ "$1" = "--no-pacman" ]
+if [ "$1" = "no-pacman" ]
 then 
-  echo "Please install $depackages manually"
+  echo "Please install $depackages packages manually manually"
 else
  sudo pacman -S $depackages --noconfirm
 fi

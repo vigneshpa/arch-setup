@@ -25,6 +25,10 @@ plugins=(${plugins[@]})
 plug_url=''
 for plu in plugins
 do
+    if [ !plu ] 
+    then
+      continue
+    fi
     plug_dir="./plugins/\$plu"
     plug_url="https://raw.githubusercontent.com/zsh-users/\${plu}/master/\${plu}.zsh"
     echo $plug_url

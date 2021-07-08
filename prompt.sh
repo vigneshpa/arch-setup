@@ -46,6 +46,6 @@ EOL
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
 
-sudo usermod -s /bin/zsh $(whoami)
+usermod -s /bin/zsh $(whoami)
 
 echo "Login again to see the changes"

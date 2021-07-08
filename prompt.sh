@@ -31,7 +31,7 @@ EOL
     sh "$dot_files_dir/update_plugins.sh"
 else
     packages="$depackages $plugins"
-    sudo pacman -S "$packages" --noconfirm
+    sudo pacman -S $packages --noconfirm
 fi
 
 cat > "$HOME/.zshenv" << EOL

@@ -11,7 +11,7 @@ mkdir -p "$dot_files_dir/cache"
 # Arch linux  packages
 
 packages=( zsh starship fortune-mod )
-plugins=( sh-autosuggestions zsh-syntax-highlighting )
+plugins=( zsh-autosuggestions zsh-syntax-highlighting )
 
 if ! command -v pacman &> /dev/null
 then

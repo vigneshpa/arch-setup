@@ -18,7 +18,7 @@ then
     echo "Warning: Pacman does not exists.  unknown environment"
     plugins_dir="$dot_files_dir/plugins"
     echo "Please install $packages packages manually manually. Installing plugins from github."
-    echo "To update plugins run this command 'bash $dot_files_dir/update_plugins.sh'"
+    echo "To update plugins run this command 'cd $dot_files_dir && bash ./update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
 plugins=( ${plugins[@]} )
@@ -31,7 +31,7 @@ do
     curl --proto '=https' --tlsv1.2 -sSf "\$plug_url" -o "\$plug_dir/\${plu}.zsh"
 done
 EOL
-    bash "$dot_files_dir/update_plugins.sh"
+    echo $(cd $dot_files_dir && bash ./update_plugins.sh)
 else
     packages="${packages[@]} ${plugins[@]}"
     sudo pacman -S $packages --noconfirm

@@ -30,11 +30,12 @@ eval "$(starship init zsh)"
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # Adding tab completions to autosuggestions
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
 ZSH_AUTOSUGGEST_STRATEGY=(history completion) #comment it if you think it is slowing down
 
 # Syntax highlition and auto completions
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$ZPLUGDIR_X/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZPLUGDIR_X/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Launching fortune
 fortune

@@ -21,8 +21,8 @@ then
     echo "To update plugins run this command 'sh $dot_files_dir/update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
-setopt shwordsplit;
-for plu in "${plugins[@]}"
+plugins=( ${plugins[@]} )
+for plu in plugins
 do
     plug_dir="./plugins/\$plu"
     mkdir -p "\$plug_dir"

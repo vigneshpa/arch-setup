@@ -21,19 +21,14 @@ then
     echo "To update plugins run this command 'bash $dot_files_dir/update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
-plugins=(${plugins[@]})
-plug_url=''
-for plu in plugins
+plugins=( ${plugins[@]} )
+for plu in "\${plugins[@]}"
 do
-    if [ !plu ] 
-    then
-      continue
-    fi
     plug_dir="./plugins/\$plu"
     plug_url="https://raw.githubusercontent.com/zsh-users/\${plu}/master/\${plu}.zsh"
-    echo $plug_url
+    echo "downloading \$plu from \$plug_url"
     mkdir -p "\$plug_dir"
-    curl --proto '=https' --tlsv1.2 -sSf "$plug_url" -o "\$plugin_dir/\$plu.zsh"
+    curl --proto '=https' --tlsv1.2 -sSf "\$plug_url" -o "\$plug_dir/\${plu}.zsh"
 done
 EOL
     bash "$dot_files_dir/update_plugins.sh"

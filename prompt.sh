@@ -28,7 +28,6 @@ do
     mkdir -p "\$plug_dir"
     curl --proto '=https' --tlsv1.2 -sSf "https://raw.githubusercontent.com/zsh-users/\$plu/master/\$plu.zsh" -o "\$plugin_dir/\$plu.zsh"
 done
-unsetopt shwordsplit;
 EOL
     bash "$dot_files_dir/update_plugins.sh"
 else

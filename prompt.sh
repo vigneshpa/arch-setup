@@ -15,9 +15,6 @@ plugins="zsh-autosuggestions zsh-syntax-highlighting"
 
 if ! command -v pacman &> /dev/null
 then
-    packages="$depackages $plugins"
-    sudo pacman -S "$packages" --noconfirm
-else
     echo "Warning:Pacman does not exists;unknown environment"
     plugins_dir="$dot_files_dir/plugins"
     echo "Please install $packages packages manually manually. Installing plugins from github. To update plugins run this command 'sh $dot_files_dir/update_plugins'"
@@ -31,6 +28,9 @@ do
 done
 EOL
     sh "$dot_files_dir/update_plugins"
+else
+    packages="$depackages $plugins"
+    sudo pacman -S "$packages" --noconfirm
 fi
 
 cat > "$HOME/.zshenv" << EOL

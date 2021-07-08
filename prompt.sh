@@ -26,6 +26,7 @@ for plu in plugins
 do
     plug_dir="./plugins/\$plu"
     plug_url="https://raw.githubusercontent.com/zsh-users/\${plu}/master/\${plu}.zsh"
+    echo $plug_url
     mkdir -p "\$plug_dir"
     curl --proto '=https' --tlsv1.2 -sSf "$plug_url" -o "\$plugin_dir/\$plu.zsh"
 done

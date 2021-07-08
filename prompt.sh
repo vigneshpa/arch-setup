@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e pipefail
 
@@ -10,8 +10,8 @@ mkdir -p "$dot_files_dir/cache"
 
 # Arch linux  packages
 
-packages="zsh starship fortune-mod"
-plugins="zsh-autosuggestions zsh-syntax-highlighting"
+packages=( zsh starship fortune-mod )
+plugins=( sh-autosuggestions zsh-syntax-highlighting )
 
 if ! command -v pacman &> /dev/null
 then
@@ -20,7 +20,7 @@ then
     echo "Please install $packages packages manually manually. Installing plugins from github."
     echo "To update plugins run this command 'sh $dot_files_dir/update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
-#!/bin/sh
+#!/bin/bash
 setopt shwordsplit;
 for plu in "${plugins[@]}"
 do
@@ -30,9 +30,9 @@ do
 done
 unsetopt shwordsplit;
 EOL
-    sh "$dot_files_dir/update_plugins.sh"
+    bash "$dot_files_dir/update_plugins.sh"
 else
-    packages="$depackages $plugins"
+    packages="${packages[@]} ${plugins[@]}"
     sudo pacman -S $packages --noconfirm
 fi
 

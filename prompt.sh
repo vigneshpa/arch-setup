@@ -26,7 +26,7 @@ cd "plugins"
 plugins=( ${plugins[@]} )
 for plu in "\${plugins[@]}"
 do
-    plug_url="https://github.com.com/zsh-users/\${plu}.git"
+    plug_url="https://github.com/zsh-users/\${plu}.git"
     echo "downloading \$plu from \$plug_url"
     git clone "\$plug_url" --depth=1
 done

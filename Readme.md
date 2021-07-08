@@ -5,7 +5,7 @@
 
 ## Shell and prompt
 
-To install my zsh shell and starship prompt run the command below. This command uses pacman to fetch the required packages from Arch repos. To instal it on other linux distributions or any unix based systems add ``-s no-pacman`` to the below command.
+To install my zsh shell and starship prompt run the command below. This command uses pacman to fetch the required packages from Arch repos. To instal it on other linux distributions or any unix based systems run the command and do as it says.
 ### To Install ZSH and starship:
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/prompt.sh | sh

@@ -53,7 +53,7 @@ export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
 EOL
 
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
-curl --proto '=https' --tlsv1.2 -sSf https://r</dev/ttyaw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
 
 if ! command -v pacman &> /dev/null
 then

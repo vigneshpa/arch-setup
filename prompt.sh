@@ -53,6 +53,16 @@ EOL
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
 
-chsh -s zsh
-
-echo "Login again to see the changes"
+zsh_loc=$(which zsh)
+if [[ $? -eq 0]]
+then
+    chsh -s $zsh_loc
+    if[[ $? -eq 0 ]]
+    then
+        echo "Login again to see the changes"
+    else
+        echo "chsh command failed"
+    fi
+else
+    echo "cannot change find zsh change the shell manually"
+fi

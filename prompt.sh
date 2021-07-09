@@ -39,6 +39,7 @@ EOL
         git clone "\$plug_url" --depth=1
     done
 else
+    echo "Installing plugins from pacman. Plugins will be automatically updated when system is updated"
     packages="${packages[@]} ${plugins[@]}"
     sudo pacman -S $packages --noconfirm
 fi

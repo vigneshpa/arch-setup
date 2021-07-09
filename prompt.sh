@@ -38,7 +38,7 @@ EOL
     do
         plug_url="https://github.com/zsh-users/${plu}.git"
         echo "downloading $plu from $plug_url"
-        git clone "$plug_url" --depth=1
+        git clone $plug_url --depth=1
     done
 else
     echo "Installing plugins from pacman. Plugins will be automatically updated when system is updated"

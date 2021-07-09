@@ -11,7 +11,7 @@ mkdir -p "$dot_files_dir/cache"
 # Arch linux  packages
 
 packages=(zsh starship fortune-mod)
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
 
 if ! command -v pacman &> /dev/null
 then
@@ -21,17 +21,23 @@ then
     echo "To update plugins run this command 'cd $dot_files_dir && bash ./update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
-mkdir -p "./plugins"
-cd "plugins"
-plugins=( ${plugins[@]} )
-for plu in "\${plugins[@]}"
+cd "$dot_files_dir/plugins"
+for plu in $(ls)
 do
-    plug_url="https://github.com/zsh-users/\${plu}.git"
-    echo "downloading \$plu from \$plug_url"
-    git clone "\$plug_url" --depth=1
+    cd \$plu
+    echo "updating \$plu"
+    git pull origin master --depth=1
+    cd ..
 done
 EOL
-    echo $(cd $dot_files_dir && bash ./update_plugins.sh)
+    mkdir -p "$dot_files_dir/plugins"
+    cd "$dot_files_dir/plugins"
+    for plu in ${plugins[@]}
+    do
+        plug_url="https://github.com/zsh-users/\${plu}.git"
+        echo "downloading \$plu from \$plug_url"
+        git clone "\$plug_url" --depth=1
+    done
 else
     packages="${packages[@]} ${plugins[@]}"
     sudo pacman -S $packages --noconfirm

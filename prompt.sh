@@ -21,6 +21,8 @@ then
     echo "To update plugins run this command 'cd $dot_files_dir && bash ./update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
+    if[[ $? -eq 0 ]]
+    then
 cd "$dot_files_dir/plugins"
 for plu in $(ls)
 do
@@ -34,9 +36,9 @@ EOL
     cd "$dot_files_dir/plugins"
     for plu in ${plugins[@]}
     do
-        plug_url="https://github.com/zsh-users/\${plu}.git"
-        echo "downloading \$plu from \$plug_url"
-        git clone "\$plug_url" --depth=1
+        plug_url="https://github.com/zsh-users/${plu}.git"
+        echo "downloading $plu from $plug_url"
+        git clone "$plug_url" --depth=1
     done
 else
     echo "Installing plugins from pacman. Plugins will be automatically updated when system is updated"

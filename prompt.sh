@@ -22,7 +22,7 @@ then
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
 cd "$dot_files_dir/plugins"
-for plu in $(ls)
+for plu in \$(ls)
 do
     cd \$plu
     echo "updating \$plu"

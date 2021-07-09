@@ -57,8 +57,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa
 
 if ! command -v pacman &> /dev/null
 then
+    echo "cannot find zsh change the shell manually"
+else
     chsh -s $(which zsh)
     echo "Login again to see the changes"
-else
-    echo "cannot change find zsh change the shell manually"
 fi

@@ -5,8 +5,10 @@
 
 # History
 HISTFILE="$ZDOTDIR/cache/.histfile"
-HISTSIZE=1000
+HISTSIZE=10000
 SAVEHIST=1000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 # Tab Completions
 autoload -Uz compinit
@@ -31,11 +33,16 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # Adding tab completions to autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
-ZSH_AUTOSUGGEST_STRATEGY=(history completion) #comment it if you think it is slowing down
+ZSH_AUTOSUGGEST_STRATEGY=(completion history) #comment it if you think it is slowing down
 
-# Syntax highlition and auto completions
+# Loading plugins
 source "$ZPLUGDIR_X/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZPLUGDIR_X/zsh-history-substring-search/zsh-history-substring-search.zsh"
 source "$ZPLUGDIR_X/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# Key bindings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Launching fortune
 fortune

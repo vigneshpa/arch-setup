@@ -21,7 +21,7 @@ then
     echo "To update plugins run this command 'cd $dot_files_dir && bash ./update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
 #!/bin/bash
-    if[[ $? -eq 0 ]]
+    if[ $? -eq 0 ]
     then
 cd "$dot_files_dir/plugins"
 for plu in $(ls)

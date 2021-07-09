@@ -33,7 +33,7 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # Adding tab completions to autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
-ZSH_AUTOSUGGEST_STRATEGY=(completion history) #comment it if you think it is slowing down
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion) #comment it if you think it is slowing down
 
 # Loading plugins
 source "$ZPLUGDIR_X/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

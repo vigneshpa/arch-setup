@@ -28,7 +28,7 @@ for plu in $(ls)
 do
     cd \$plu
     echo "updating \$plu"
-    git pull origin master --depth=1
+    git pull origin --depth=1
     cd ..
 done
 EOL

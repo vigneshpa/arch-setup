@@ -3,12 +3,21 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Starship prompt
+eval "$(starship init zsh)"
+
+# Disabling beep
+unsetopt BEEP
+
 # History
 HISTFILE="$ZDOTDIR/cache/.histfile"
 HISTSIZE=10000
-SAVEHIST=1000
+SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
+
+# Ignore failed commands
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # Tab Completions
 autoload -Uz compinit
@@ -19,17 +28,9 @@ zmodload zsh/complist
 compinit -d "$ZDOTDIR/cache/.zcompdump"
 _comp_options+=(globdots)
 
-# Disabling beep
-unsetopt BEEP
-
 # Aliases
 alias ls='ls --color=auto'
 alias zshrc='nano ~/.config/zsh/.zshrc'
-# Starship
-eval "$(starship init zsh)"
-
-# Ignore failed commands
-zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
 # Adding tab completions to autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50

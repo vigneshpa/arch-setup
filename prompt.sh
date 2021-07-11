@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e pipefail
 
@@ -8,19 +8,22 @@ plugins_dir="/usr/share/zsh/plugins"
 
 mkdir -p "$dot_files_dir/cache"
 
-# Arch linux  packages
+packages="zsh starship fortune-mod"
+plugins="zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search"
 
-packages=(zsh starship fortune-mod)
-plugins=(zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search)
 
-if ! command -v pacman &> /dev/null
-then
-    echo "Warning: Pacman does not exists.  unknown environment"
+# Installing packages
+{ command -v pacman >/dev/null 2>&1 && {
+    echo "Installing packages from pacman. Plugins will be automatically updated when system is updated"
+    packages="$packages $plugins"
+    sudo pacman -S $packages --noconfirm
+} } || {
     plugins_dir="$dot_files_dir/plugins"
-    echo "Please install $packages packages manually manually. Installing plugins from github."
-    echo "To update plugins run this command 'cd $dot_files_dir && bash ./update_plugins.sh'"
+    echo "Warning: Pacman does not exists."
+    echo "Please install $packages packages manually manually. Installing zsh plugins from github."
+    echo "To update plugins run this command 'cd $dot_files_dir && sh ./update_plugins.sh'"
     cat > "$dot_files_dir/update_plugins.sh" << EOL
-#!/bin/bash
+#!/bin/sh
 cd "$dot_files_dir/plugins"
 for plu in \$(ls)
 do
@@ -32,31 +35,23 @@ done
 EOL
     mkdir -p "$dot_files_dir/plugins"
     cd "$dot_files_dir/plugins"
-    for plu in ${plugins[@]}
+    for plu in $plugins
     do
         plug_url="https://github.com/zsh-users/${plu}.git"
         echo "downloading $plu from $plug_url"
         git clone $plug_url --depth=1
     done
-else
-    echo "Installing plugins from pacman. Plugins will be automatically updated when system is updated"
-    packages="${packages[@]} ${plugins[@]}"
-    sudo pacman -S $packages --noconfirm
-fi
+}
 
+# Writing .zshenv file
 cat > "$HOME/.zshenv" << EOL
 export PATH="\$PATH"            # Change this line to change path variable
 export ZDOTDIR="$dot_files_dir"   # Required to load zshrc
 export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
 EOL
 
+# Downloading  dot files
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
-
-if ! command -v which &> /dev/null
-then
-    echo "cannot find zsh change the shell manually"
-else
-    chsh -s $(which zsh 2>/dev/null) </dev/tty
-    echo "Login again to see the changes"
-fi
+# Changing current shell
+{ chsh -s $(which zsh 2>/dev/null) </dev/tty && echo "Login again to see the changes" } || echo "Cannot the shell. Change the shell manually."

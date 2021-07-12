@@ -2,7 +2,6 @@
 
 set -e pipefail
 
-
 dot_files_dir="$HOME/.config/zsh"
 plugins_dir="/usr/share/zsh/plugins"
 
@@ -13,11 +12,11 @@ plugins="zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-searc
 
 
 # Installing packages
-{ command -v pacman >/dev/null 2>&1 && {
+command -v pacman >/dev/null 2>&1 && {
     echo "Installing packages from pacman. Plugins will be automatically updated when system is updated"
     packages="$packages $plugins"
     sudo pacman -S $packages --noconfirm
-} } || {
+} || {
     plugins_dir="$dot_files_dir/plugins"
     echo "Warning: Pacman does not exists."
     echo "Please install $packages packages manually manually. Installing zsh plugins from github."
@@ -44,14 +43,20 @@ EOL
 }
 
 # Writing .zshenv file
-cat > "$HOME/.zshenv" << EOL
+cat > "$HOME/.profile" << EOL
 export PATH="\$PATH"            # Change this line to change path variable
 export ZDOTDIR="$dot_files_dir"   # Required to load zshrc
 export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
+export EDITOR=nano
+EOL
+
+cat > "$HOME/.zshenv" << EOL
+source "\$HOME/.profile"
 EOL
 
 # Downloading  dot files
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
 # Changing current shell
-{ chsh -s $(which zsh 2>/dev/null) </dev/tty && echo "Login again to see the changes" } || echo "Cannot the shell. Change the shell manually."
+chsh -s $(which zsh 2>/dev/null) </dev/tty && echo "Login again to see the changes" || echo "Cannot the shell. Change the shell manually."
+exit 0

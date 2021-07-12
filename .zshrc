@@ -30,10 +30,12 @@ _comp_options+=(globdots)
 
 # Aliases
 alias ls='ls --color=auto'
-alias zshrc='nano ~/.config/zsh/.zshrc'
+[ -z  $EDITOR ] && EDITOR=nano
+alias zshrc="$EDITOR ~/.config/zsh/.zshrc"
 
 # Adding tab completions to autosuggestions
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=50
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=150
+#ZSH_AUTOSUGGEST_HISTORY_IGNORE="{cd} *"
 ZSH_AUTOSUGGEST_STRATEGY=(completion) #comment it if you think it is slowing down
 
 # Loading plugins

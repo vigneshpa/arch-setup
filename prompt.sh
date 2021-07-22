@@ -42,15 +42,16 @@ EOL
     done
 }
 
-# Writing .zshenv file
-cat > "$HOME/.profile" << EOL
+# Writing .zprofile file
+cat > "$HOME/.zprofile" << EOL
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile' # sourcing .profile if it exists
 export ZDOTDIR="$dot_files_dir"   # Required to load zshrc
 export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
 EOL
 
-cat > "$HOME/.zshenv" << EOL
-source "\$HOME/.profile"
+cat >> "$HOME/.profile" << EOL
+PATH=$PATH
+EDITOR=nano
 EOL
 
 # Downloading  dot files

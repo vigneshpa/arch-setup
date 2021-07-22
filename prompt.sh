@@ -20,8 +20,8 @@ command -v pacman >/dev/null 2>&1 && {
     plugins_dir="$dot_files_dir/plugins"
     echo "Warning: Pacman does not exists."
     echo "Please install $packages packages manually manually. Installing zsh plugins from github."
-    echo "To update plugins run this command 'cd $dot_files_dir && sh ./update_plugins.sh'"
-    cat > "$dot_files_dir/update_plugins.sh" << EOL
+    echo "To update plugins run this command 'sh $dot_files_dir/update.sh'"
+    cat > "$dot_files_dir/update.sh" << EOL
 #!/bin/sh
 cd "$dot_files_dir/plugins"
 for plu in \$(ls)
@@ -31,6 +31,8 @@ do
     git pull origin --depth=1
     cd ..
 done
+cd "$dot_files_dir/bin"
+sh -c "\$(curl -fsSL https://starship.rs/install.sh)" -- -f -y -b ./
 EOL
     mkdir -p "$dot_files_dir/plugins"
     cd "$dot_files_dir/plugins"
@@ -40,6 +42,9 @@ EOL
         echo "downloading $plu from $plug_url"
         git clone $plug_url --depth=1
     done
+    mkdir -p "$dot_files_dir/bin"
+    cd "$dot_files_dir/bin"
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -f -y -b ./
 }
 
 # Writing .zprofile file

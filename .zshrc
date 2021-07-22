@@ -3,6 +3,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Adding functions
+fpath=( "$ZDOTDIR/funcs" "${fpath[@]}" )
+
 # Starship prompt
 eval "$(starship init zsh)"
 
@@ -10,7 +13,7 @@ eval "$(starship init zsh)"
 unsetopt BEEP
 
 # History
-HISTFILE="$ZDOTDIR/cache/.histfile"
+HISTFILE="$HOME/.cache/.histfile"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
@@ -25,13 +28,13 @@ zstyle ':completion:*' menu select
 #case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit -d "$ZDOTDIR/cache/.zcompdump"
+compinit -d "$HOME/.cache/.zcompdump"
 _comp_options+=(globdots)
 
 # Aliases
 alias ls='ls --color=auto'
-[ -z  $EDITOR ] && EDITOR=nano
-alias zshrc="$EDITOR ~/.config/zsh/.zshrc"
+alias zshrc="$EDITOR $HOME/.config/zsh/.zshrc"
+alias cp='cp -iv'
 
 # Adding tab completions to autosuggestions
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=150
@@ -44,8 +47,8 @@ source "$ZPLUGDIR_X/zsh-history-substring-search/zsh-history-substring-search.zs
 source "$ZPLUGDIR_X/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Key bindings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
+bindkey '^[[A'  history-substring-search-up
+bindkey '^[[B'  history-substring-search-down
+bindkey '^[[3~' delete-char
 # Launching fortune
 fortune

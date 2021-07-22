@@ -44,10 +44,9 @@ EOL
 
 # Writing .zshenv file
 cat > "$HOME/.profile" << EOL
-export PATH="\$PATH"            # Change this line to change path variable
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile' # sourcing .profile if it exists
 export ZDOTDIR="$dot_files_dir"   # Required to load zshrc
 export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
-export EDITOR=nano
 EOL
 
 cat > "$HOME/.zshenv" << EOL

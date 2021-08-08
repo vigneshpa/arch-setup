@@ -19,7 +19,7 @@ command -v pacman >/dev/null 2>&1 && {
 } || {
     plugins_dir="$dot_files_dir/plugins"
     echo "Warning: Pacman does not exists."
-    echo "Please install $packages packages manually manually. Installing zsh plugins from github."
+    echo "Please install zsh and fortune manually. Installing zsh plugins from github."
     echo "To update plugins run this command 'sh $dot_files_dir/update.sh'"
     cat > "$dot_files_dir/update.sh" << EOL
 #!/bin/sh

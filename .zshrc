@@ -7,7 +7,7 @@
 fpath=( "$ZDOTDIR/funcs" "${fpath[@]}" )
 
 # Starship prompt
-eval "$(starship init zsh || ./bin/starship init zsh)"
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)" || eval "$($ZDOTDIR/bin/starship init zsh)"
 
 # Disabling beep
 unsetopt BEEP

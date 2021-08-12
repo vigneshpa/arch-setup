@@ -7,7 +7,7 @@ plugins_dir="/usr/share/zsh/plugins"
 
 mkdir -p "$dot_files_dir/cache"
 
-packages="zsh starship fortune-mod"
+packages="zsh starship"
 plugins="zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search"
 
 
@@ -16,11 +16,11 @@ command -v pacman >/dev/null 2>&1 && {
     echo "Installing packages from pacman. Plugins will be automatically updated when system is updated"
     packages="$packages $plugins"
     sudo pacman -S $packages --noconfirm
-} || {
+    } || {
     plugins_dir="$dot_files_dir/plugins"
     echo "Warning: Pacman does not exists."
-    echo "Please install zsh and fortune manually. Installing zsh plugins from github."
-    echo "To update plugins run this command 'sh $dot_files_dir/update.sh'"
+    echo "Warning: Please install zsh manually. Installing zsh plugins from github."
+    echo "Info:    To update plugins run this command 'sh $dot_files_dir/update.sh'"
     cat > "$dot_files_dir/update.sh" << EOL
 #!/bin/sh
 cd "$dot_files_dir/plugins"

@@ -8,14 +8,14 @@
 To install my zsh shell and starship prompt run the command below. This command uses pacman to fetch the required packages from Arch repos. To instal it on other linux distributions or any unix based systems run the command and do as it says.
 ### To Install ZSH and starship:
 ```sh
-curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/prompt.sh | sh
+curl -sSf https://vigneshpa.github.io/arch-setup/prompt.sh | sh
 ```
 
 ## Arch proot on termux
 To install arch linux on termux and to run it every time when you open it, run the following command in termux shell after installing proot-distro (``pkg install proot-distro``) and archlinux (``proot-distro install archlinux``)
 ### Setup arch linux on termux:
 ```sh
-curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/termux.sh | sh
+curl -sSf https://vigneshpa.github.io/arch-setup/termux.sh | sh
 ```
 >This script installs 'starship' in termux and arch and installs 'openssh' in termux. Tthe SSH Daemon (`sshd`) will be started every time when an user logs into termux
 

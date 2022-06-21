@@ -13,7 +13,7 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)" || eval "$($Z
 unsetopt BEEP
 
 # History
-HISTFILE="$HOME/.cache/.histfile"
+HISTFILE="~/.cache/.histfile"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
@@ -28,12 +28,12 @@ zstyle ':completion:*' menu select
 #case insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
-compinit -d "$HOME/.cache/.zcompdump"
+compinit -d "~/.cache/.zcompdump"
 _comp_options+=(globdots)
 
 # Aliases
 alias ls='ls --color=auto'
-alias zshrc="$EDITOR $HOME/.config/zsh/.zshrc"
+alias zshrc="$EDITOR ~/.config/zsh/.zshrc"
 alias cp='cp -iv'
 
 # Adding tab completions to autosuggestions
@@ -50,5 +50,3 @@ source "$ZPLUGDIR_X/zsh-autosuggestions/zsh-autosuggestions.zsh"
 bindkey '^[[A'  history-substring-search-up
 bindkey '^[[B'  history-substring-search-down
 # bindkey '^[[3~' delete-char
-# Launching fortune
-

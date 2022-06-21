@@ -55,8 +55,8 @@ export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
 EOL
 
 cat >> "$HOME/.profile" << EOL
-PATH=$PATH
-EDITOR=nano
+export PATH="\$PATH"
+export EDITOR=nano
 EOL
 
 # Downloading  dot files

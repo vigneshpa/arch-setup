@@ -3,7 +3,10 @@
 set -e pipefail
 
 dot_files_dir="$HOME/.config/zsh"
+dot_files_dir_raw="\$HOME/.config/zsh"
+
 plugins_dir="/usr/share/zsh/plugins"
+plugins_dir_raw="/usr/share/zsh/plugins"
 
 mkdir -p "$dot_files_dir/cache"
 
@@ -14,16 +17,16 @@ plugins="zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-searc
 # Installing packages
 command -v pacman >/dev/null 2>&1 && {
     echo "Installing packages from pacman. Plugins will be automatically updated when system is updated"
-    packages="$packages $plugins"
-    sudo pacman -S $packages --noconfirm
+    sudo pacman -S $packages $plugins --noconfirm
     } || {
     plugins_dir="$dot_files_dir/plugins"
-    echo "Warning: Pacman does not exists."
+    plugins_dir_raw="$dot_files_dir_raw/plugins"
+    echo "Warning: pacman command failed."
     echo "Warning: Please install zsh manually. Installing zsh plugins from github."
-    echo "Info:    To update plugins run this command 'sh $dot_files_dir/update.sh'"
+    echo "Info:    To update plugins run this command 'sh $dot_files_dir_raw/update.sh'"
     cat > "$dot_files_dir/update.sh" << EOL
 #!/bin/sh
-cd "$dot_files_dir/plugins"
+cd "$dot_files_dir_raw/plugins"
 for plu in \$(ls)
 do
     cd \$plu
@@ -31,7 +34,7 @@ do
     git pull origin --depth=1
     cd ..
 done
-cd "$dot_files_dir/bin"
+cd "$dot_files_dir_raw/bin"
 sh -c "\$(curl -fsSL https://starship.rs/install.sh)" -- -f -y -b ./
 EOL
     mkdir -p "$dot_files_dir/plugins"
@@ -48,10 +51,10 @@ EOL
 }
 
 # Writing .zprofile file
-cat > "$HOME/.zprofile" << EOL
+cat > "$HOME/.zshenv" << EOL
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile' # sourcing .profile if it exists
-export ZDOTDIR="$dot_files_dir"   # Required to load zshrc
-export ZPLUGDIR_X="$plugins_dir"  # Required to load zsh plugins
+export ZDOTDIR="$dot_files_dir_raw"   # Required to load zshrc
+export ZPLUGDIR_X="$plugins_dir_raw"  # Required to load zsh plugins
 EOL
 
 cat >> "$HOME/.profile" << EOL

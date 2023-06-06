@@ -62,14 +62,14 @@ export PATH="\$PATH"
 export EDITOR=nano
 EOL
 
-sudo bash -c echo "include \"/usr/share/nano/*.nanorc\"" >> /etc/nanorc
+sudo bash -c 'echo "include \"/usr/share/nano/*.nanorc\"" >> /etc/nanorc'
 
 # Downloading  dot files
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/.zshrc -o "$dot_files_dir/.zshrc"
 curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/vigneshpa/arch-setup/main/starship.toml -o "$dot_files_dir/../starship.toml"
 sudo mkdir -p "/root/.config"
 sudo cp "$dot_files_dir/../starship.toml" /root/.config/
-sudo -c echo "eval \"$(starship init bash)\"" >> /root/.bashrc
+sudo bash -c 'echo "eval \"$(starship init bash)\"" >> /root/.bashrc'
 # Changing current shell
 chsh -s $(which zsh 2>/dev/null) </dev/tty && echo "Login again to see the changes" || echo "Cannot the shell. Change the shell manually."
 exit 0
